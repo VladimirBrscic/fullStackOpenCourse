@@ -41,5 +41,5 @@ sequenceDiagram
     server-->>browser: [{ "content": "User entered content", "date": "2023-1-1" }, ... ]
     deactivate server    
 
-    Note right of browser: By executing callback function from javascript file browser renders the notes.
+    Note right of browser: In executing Javascript file browser sends HTTP request for JSON file. Server sends JSON file. Browser executes callback function from javascript file and renders the notes.
 ```

@@ -27,7 +27,7 @@ browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: [{ "content": "User entered content", "date": "2023-1-1" }, ... ]
+    server-->>browser: [{ "content": "Some note", "date": "2023-1-1" }, ... ]
     deactivate server    
 
     Note right of browser: In executing Javascript file browser sends HTTP request for JSON file. Server sends JSON file. Browser executes callback function from javascript file and renders the notes.

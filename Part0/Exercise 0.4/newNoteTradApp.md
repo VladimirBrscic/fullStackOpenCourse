@@ -20,19 +20,21 @@ sequenceDiagram
     server-->>browser: HTML file
     deactivate server
     
-    Note right of browser: Because of link tag in HTML file head element, browser sends HTTP request for CSS file
+    
     
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
     server-->>browser: the css file
     deactivate server
     
-    Note right of browser: Because of script tag in HTML file head element, browser sends HTTP request for JavaScript file
-    
+    Note right of browser: Because of link tag in HTML file head element, browser sends HTTP request for CSS file. Server sends requested file.
+       
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
     server-->>browser: the JavaScript file
     deactivate server
+    
+    Note right of browser: Because of script tag in HTML file head element, browser sends HTTP request for JavaScript file. Server sends requested file..
     
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server

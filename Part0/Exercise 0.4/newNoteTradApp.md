@@ -8,7 +8,7 @@ sequenceDiagram
     
     Note right of browser: User enters new note in the form element and submits it. Upon submiting form browser sends HTTP POST request to server.
     
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/new_note
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
     server-->>browser: redirection by status code 302 to https://studies.cs.helsinki.fi/exampleapp/notes
     deactivate server

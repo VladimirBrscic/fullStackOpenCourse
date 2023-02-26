@@ -1,62 +1,68 @@
 import { useState } from "react";
 
-const Button = ({ handleClick, text }) => {
-  return (
-    <>
-      <button onClick={handleClick}>{text}</button>
-    </>
-  );
-};
 
-const Score = ({ text, result, percent }) => {
+const StatisticLine = ({ stat, text, percent }) => {
   return (
-    <div>
-      {text} {result} {percent}
-    </div>
-  );
-};
+    <tr>
+      <td>{text}</td>
+      <td>{stat}{percent}</td>
+    </tr>
+  )
+}
 
 const Statistics = ({ good, neutral, bad }) => {
-  const allVotes = good + neutral + bad;
+  const all = good + neutral + bad;
+  const average = (good - bad) / all;
+  const positive = (good / all) * 100;
 
-  if (allVotes) {
+  if (all) {
     return (
-      <div>
-        <h2>statisctics</h2>
-        <Score text="good" result={good} />
-        <Score text="neutral" result={neutral} />
-        <Score text="bad" result={bad} />
-        <Score text='all' result={allVotes} />
-        <Score text='average' result={(good - bad) / allVotes} />
-        <Score text='positive' result={(good / allVotes) * 100} percent='%' />
-      </div>
-    )
+      <table>
+        <tbody>
+          <StatisticLine stat={good} text='good' />
+          <StatisticLine stat={neutral} text='neutral' />
+          <StatisticLine stat={bad} text='bad' />
+          <StatisticLine stat={all} text='all' />
+          <StatisticLine stat={average} text='average' />
+          <StatisticLine stat={positive} text='positive' percent='%' />
+        </tbody>
+      </table>
+    );
   } else {
-    return (
-      <>
-        <h2>statisctics</h2>
-        <div>no feedback has been given</div>
-      </>
-    )
+    return <p>no feedback has been given</p>;
   }
+};
 
+
+const Button = ({ clickHandler, text }) => {
+  return <button onClick={clickHandler}>{text}</button>
 }
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
+  const handleGood = () => {
+    setGood(good + 1);
+  };
+  const handleNeutral = () => {
+    setNeutral(neutral + 1);
+  };
+  const handleBad = () => {
+    setBad(bad + 1);
+  };
+
   return (
-    <div>
-      <h2>give feedback</h2>
-      <Button handleClick={() => setGood(good + 1)} text="good" />
-      <Button handleClick={() => setNeutral(neutral + 1)} text="neutral" />
-      <Button handleClick={() => setBad(bad + 1)} text="bad" />
-      <Statistics
-        good={good}
-        neutral={neutral}
-        bad={bad}
-      />
-    </div>)
-}
+    <>
+      <h1>give feedback</h1>
+      <Button clickHandler={handleGood} text='good' />
+      <Button clickHandler={handleNeutral} text='neutral' />
+      <Button clickHandler={handleBad} text='bad' />
+      <h2>statistics</h2>
+      <Statistics good={good} neutral={neutral} bad={bad} />
+    </>
+  );
+};
+
 export default App;
